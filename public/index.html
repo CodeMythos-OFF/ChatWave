@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#075e54">
+  <meta name="description" content="ChatWave — simple, real-time messaging.">
+  <title>ChatWave — Messages</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/socket.io/socket.io.js" defer></script>
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main class="app-shell">
+    <aside class="sidebar">
+      <header class="brand-row">
+        <div class="brand-mark" aria-hidden="true">C</div>
+        <div><h1>ChatWave</h1><p>Keep the conversation going</p></div>
+      </header>
+      <section class="profile-card">
+        <div class="avatar" id="my-avatar">?</div>
+        <div class="profile-copy"><strong id="my-name">Not signed in</strong><span id="connection-state">Connecting…</span></div>
+        <button class="icon-button" id="change-name" type="button" aria-label="Change display name" title="Change name">✎</button>
+      </section>
+      <div class="section-heading"><span>CHATS</span><span class="online-dot"></span></div>
+      <button class="chat-list-item active" type="button">
+        <div class="chat-avatar">🌊</div>
+        <div class="chat-preview"><strong>Community chat</strong><span>Say hello to everyone</span></div>
+        <span class="chat-time">Now</span>
+      </button>
+      <div class="sidebar-footer">Simple conversations, together.</div>
+    </aside>
+
+    <section class="conversation" aria-label="Community chat">
+      <header class="conversation-header">
+        <div class="chat-avatar large">🌊</div>
+        <div class="conversation-title"><h2>Community chat</h2><p id="online-count">Connecting to ChatWave…</p></div>
+        <span class="header-status"><span class="online-dot"></span> Live</span>
+      </header>
+      <div class="welcome-banner"><span>✦</span> Welcome to ChatWave. Be kind, keep it friendly.</div>
+      <section class="messages" id="messages" aria-live="polite" aria-label="Messages">
+        <div class="empty-state" id="empty-state"><div class="empty-icon">✉</div><h3>Your conversation starts here</h3><p>Send a message to start chatting with people online.</p></div>
+      </section>
+      <form class="composer" id="message-form">
+        <label class="sr-only" for="message-input">Write a message</label>
+        <textarea id="message-input" rows="1" maxlength="2000" placeholder="Type a message…" autocomplete="off" disabled></textarea>
+        <span class="composer-hint">Enter to send · Shift + Enter for a new line</span>
+        <button id="send-button" class="send-button" type="submit" aria-label="Send message" disabled><span>➤</span></button>
+      </form>
+    </section>
+  </main>
+
+  <dialog id="name-dialog" class="name-dialog">
+    <form method="dialog" id="name-form">
+      <div class="dialog-logo">C</div>
+      <h2>Welcome to ChatWave</h2>
+      <p>Choose a display name to join the community chat.</p>
+      <label for="name-input">Your display name</label>
+      <input id="name-input" name="username" maxlength="24" minlength="2" placeholder="e.g. Alex" required autocomplete="nickname">
+      <p class="dialog-error" id="name-error" role="alert"></p>
+      <button class="primary-button" id="join-button" type="submit">Join chat <span>→</span></button>
+      <small>This first version uses a display name, not a secure account.</small>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
